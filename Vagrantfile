@@ -17,10 +17,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #      d.has_ssh = true
 #    end
 #  end
-   config.vm.define "db" do |app|
+   config.vm.define "testdb" do |app|
     app.vm.provider "docker" do |d|
       d.image = "paintedfox/postgresql"
-      d.name = "db"
+      d.name = "testdb"
+      d.env = {"DB"   => "testdb",
+      	       "PASS" => "My0wnPassword",
+      	       "USER" => "petclinic"}
+	       # Use vagrant docker-logs to se that it works!!!
     end
    end
 end
