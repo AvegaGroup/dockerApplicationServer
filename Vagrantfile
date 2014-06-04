@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     app.vm.provider "docker" do |d|
       d.image = "paintedfox/postgresql"
       d.name = "testdb"
-      d.env = {"DB"   => "testdb",
-      	       "PASS" => "My0wnPassword",
-      	       "USER" => "petclinic"}
+      d.env = {"DB"   => "petclinic",
+      	       "PASS" => "mac",
+      	       "USER" => "pc"}
 	       # Use vagrant docker-logs to se that it works!!!
     end
    end
