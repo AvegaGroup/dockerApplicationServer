@@ -12,6 +12,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "appServer" do |config|
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
     config.vm.provider "docker" do |d|
       d.build_dir = "." 
       d.name = "appServer"
