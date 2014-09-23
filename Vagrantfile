@@ -1,25 +1,16 @@
+# -*- coding: utf-8 -*-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-#    config.vm.network :forwarded_port, guest: 4243, host: 12345
-#    config.vm.forward_port 4243, 14243
-# Not working to change the docker port, run 
-# sudo launchctl unload /Library/LaunchDaemons/com.crashplan.engine.plist
-# to stop Crashplan
-
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-
-# config.vm.provider "virtualbox" do |v|
-    # On VirtualBox, we don't have guest additions or a functional vboxsf
-    # in TinyCore Linux, so tell Vagrant that so it can be smarter.
-#    v.check_guest_additions = false
-#    v.functional_vboxsf     = false
-#    v.customize ["modifyvm", :id, "--memory", "1024"]
-#  end
+# Felsökning med:
+# vagrant global-status | grep docker
+# vagrant ssh a+????
+# docker ps -a
+# docker run -v /var/lib/docker/docker_1411497627_69050:/etc/go/changed -it d1fa8897ed51 /bin/bash
 
   config.vm.define "go" do |config|
   config.vm.synced_folder "go/etc/", "/etc/go/changed" 
