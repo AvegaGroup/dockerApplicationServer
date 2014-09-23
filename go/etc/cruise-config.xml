@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="69">
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" />
+  <pipelines group="docker">
+    <pipeline name="Build" labeltemplate="1.0.${COUNT}" isLocked="false">
+      <environmentvariables>
+        <variable name="LISTEN_ON_PORT">
+          <value>8090</value>
+        </variable>
+      </environmentvariables>
+      <materials>
+        <git url="https://github.com/dmarell/doodleshop" />
+      </materials>
+      <stage name="Set_version">
+        <jobs>
+          <job name="mvn_set_version">
+            <tasks>
+              <exec command="mvn">
+                <arg>versions:set</arg>
+                <arg>-DnewVersion=${env.GO_PIPELINE_LABEL}</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="Package" fetchMaterials="false">
+        <jobs>
+          <job name="mvn_clean_package">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>package</arg>
+                <arg>-B</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="LocalTest" fetchMaterials="false">
+        <jobs>
+          <job name="Dummy_Local_Integration_tests">
+            <tasks>
+              <exec command="/bin/true" />
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="CreateDockerImage" fetchMaterials="false">
+        <jobs>
+          <job name="Docker_Build">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>sudo docker build --tag=doodleshop:$GO_PIPELINE_LABEL .</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="DockerRun">
+        <jobs>
+          <job name="docker_run_doodle_shop_tag_">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>-c</arg>
+                <arg>sudo docker run -d --name doodleshop-test -p 28080:8080 doodleshop:$GO_PIPELINE_LABEL</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="MavenRunTestsAgainsDockerImage">
+        <jobs>
+          <job name="tired">
+            <tasks>
+              <exec command="/bin/bash">
+                <arg>smoketest.sh</arg>
+                <arg>28080</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <agents>
+    <agent hostname="go" ipaddress="10.0.2.15" uuid="6f1e9596-2fc7-4772-ac7e-f76d0d49f932" />
+  </agents>
+</cruise>
+
