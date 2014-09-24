@@ -18,6 +18,7 @@
               <exec command="mvn">
                 <arg>versions:set</arg>
                 <arg>-DnewVersion=${env.GO_PIPELINE_LABEL}</arg>
+		<arg>-B</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -87,8 +88,5 @@
       </stage>
     </pipeline>
   </pipelines>
-  <agents>
-    <agent hostname="go" ipaddress="10.0.2.15" uuid="6f1e9596-2fc7-4772-ac7e-f76d0d49f932" />
-  </agents>
 </cruise>
 
