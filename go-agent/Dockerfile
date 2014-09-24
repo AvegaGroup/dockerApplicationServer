@@ -21,7 +21,14 @@ RUN  \
   apt-get -y upgrade && \
   apt-get install -y vim wget curl git maven
 
+#Install docker
+RUN curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+
 # Config files, latest so all downloads is cached
+
+# Go-agent needs to run sudo to do docker commands
+ADD sudoers /etc/sudoers.d/go-agent
+RUN chmod 0440 /etc/sudoers.d/go-agent
 
 # This file has my authorization string so that I don't have to approve new agents. 
 ADD autoregister.properties /var/lib/go-agent/config/autoregister.properties

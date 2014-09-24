@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.build_dir = "go-agent" 
 #      d.ports = [ "28153:8153" ]
       d.name = "go-agent"
+      d.volumes = [ "/var/run/docker.sock:/var/run/docker.sock" ]
       d.link("go-server:go-server")
     end
   end
