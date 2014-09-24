@@ -1,5 +1,9 @@
+# From: https://github.com/mitchellh/vagrant/issues/3726
 Vagrant.configure("2") do |config|
   config.vm.box = "mitchellh/boot2docker"
+
+  # All port forwards for docker containers need to be added here
+  config.vm.network "forwarded_port", guest: 28153, host: 28153
 
   config.vm.provider "virtualbox" do |v|
     # On VirtualBox, we don't have guest additions or a functional vboxsf

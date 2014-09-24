@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="69">
-  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" />
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" agentAutoRegisterKey="388b633a88de126531afa41eff9aa69e"/>
   <pipelines group="docker">
     <pipeline name="Build" labeltemplate="1.0.${COUNT}" isLocked="false">
       <environmentvariables>
