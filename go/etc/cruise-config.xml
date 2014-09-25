@@ -33,15 +33,6 @@
           </job>
         </jobs>
       </stage>
-      <stage name="LocalTest" fetchMaterials="false">
-        <jobs>
-          <job name="Dummy_Local_Integration_tests">
-            <tasks>
-              <exec command="/bin/true" />
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
       <stage name="CreateDockerImage" fetchMaterials="false">
         <jobs>
           <job name="Docker_Build">
