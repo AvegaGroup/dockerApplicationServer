@@ -81,6 +81,95 @@
           </job>
         </jobs>
       </stage>
+      <stage name="DeployToAutoLarge" fetchMaterials="false">
+        <environmentvariables>
+          <variable name="DOODLE_ENV">
+            <value>autolarge</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="DeployAndSmokeTests">
+            <tasks>
+              <exec command="bash">
+                <arg>deployandsmoke.sh</arg>
+                <arg>3</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="TestAutoLarge" fetchMaterials="false">
+        <environmentvariables>
+          <variable name="DOODLE_ENV">
+            <value>autolarge</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="RunTest">
+            <tasks>
+              <exec command="bash">
+                <arg>runtest.sh</arg>
+                <arg>3</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="DeployToMan" fetchMaterials="false">
+        <environmentvariables>
+          <variable name="DOODLE_ENV">
+            <value>man</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="DeployAndSmokeTests">
+            <tasks>
+              <exec command="bash">
+                <arg>deployandsmoke.sh</arg>
+                <arg>4</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="TestMan" fetchMaterials="false">
+        <environmentvariables>
+          <variable name="DOODLE_ENV">
+            <value>man</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="NotifyManTest">
+            <tasks>
+              <exec command="bash">
+                <arg>-c</arg>
+                <arg>echo</arg>
+                <arg>Send mail</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="DeployToProd" fetchMaterials="false">
+        <approval type="manual" />
+        <environmentvariables>
+          <variable name="DOODLE_ENV">
+            <value>prod</value>
+          </variable>
+        </environmentvariables>
+        <jobs>
+          <job name="DeployAndSmokeTests">
+            <tasks>
+              <exec command="bash">
+                <arg>deployandsmoke.sh</arg>
+                <arg>5</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
     </pipeline>
   </pipelines>
 </cruise>
