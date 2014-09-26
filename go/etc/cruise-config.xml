@@ -53,12 +53,11 @@
           </variable>
         </environmentvariables>
         <jobs>
-          <job name="docker_run_doodle_shop_tag_">
+          <job name="DeployAndSmokeTests">
             <tasks>
-              <exec command="/bin/bash">
+              <exec command="bash">
                 <arg>deployandsmoke.sh</arg>
                 <arg>2</arg>
-                <runif status="passed" />
               </exec>
             </tasks>
           </job>
@@ -71,10 +70,11 @@
           </variable>
         </environmentvariables>
         <jobs>
-          <job name="tired">
+          <job name="RunTest">
             <tasks>
-              <exec command="/bin/bash">
-                <arg>smoketest.sh</arg>
+              <exec command="bash">
+                <arg>runtest.sh</arg>
+                <arg>2</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
