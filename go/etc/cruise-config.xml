@@ -46,17 +46,17 @@
           </job>
         </jobs>
       </stage>
-      <stage name="DockerRun" fetchMaterials="false">
+      <stage name="DeployToAutoSmall" fetchMaterials="false">
         <environmentvariables>
           <variable name="DOODLE_ENV">
-            <value>test</value>
+            <value>autosmall</value>
           </variable>
         </environmentvariables>
         <jobs>
           <job name="docker_run_doodle_shop_tag_">
             <tasks>
               <exec command="/bin/bash">
-                <arg>deploy.sh</arg>
+                <arg>deployandsmoke.sh</arg>
                 <arg>2</arg>
                 <runif status="passed" />
               </exec>
@@ -64,10 +64,10 @@
           </job>
         </jobs>
       </stage>
-      <stage name="MavenRunTestsAgainsDockerImage" fetchMaterials="false">
+      <stage name="TestAutoSmall" fetchMaterials="false">
         <environmentvariables>
           <variable name="DOODLE_ENV">
-            <value>test</value>
+            <value>autosmall</value>
           </variable>
         </environmentvariables>
         <jobs>
