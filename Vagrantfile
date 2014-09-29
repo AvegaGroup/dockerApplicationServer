@@ -38,19 +38,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.name = "go-agent"
       d.volumes = [ "/var/run/docker.sock:/var/run/docker.sock" ]
       d.link("go-server:go-server")
-      d.link("proxy:proxy")
+      d.link("repository:repository")
+#      d.link("proxy:proxy")
     end
   end
 
-  config.vm.define "nginx-proxy" do |config|
-    config.vm.provider "docker" do |d|
-      d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.image = "jwilder/nginx-proxy"
-      d.name = "proxy"
-      d.ports = [ "80:80" ]
-      d.volumes = [ "/var/run/docker.sock:/tmp/docker.sock" ]
-    end
-  end
+  # config.vm.define "nginx-proxy" do |config|
+  #   config.vm.provider "docker" do |d|
+  #     d.vagrant_vagrantfile = "docker/Vagrantfile"
+  #     d.image = "jwilder/nginx-proxy"
+  #     d.name = "proxy"
+  #     d.ports = [ "80:80" ]
+  #     d.volumes = [ "/var/run/docker.sock:/tmp/docker.sock" ]
+  #   end
+  # end
 
   config.vm.define "registry" do |config|
     config.vm.provider "docker" do |d|
@@ -61,6 +62,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  config.vm.define "repository" do |config|
+    config.vm.provider "docker" do |d|
+      d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.image = "mattgruter/artifactory"
+      d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
+      d.name = "repository"
+      d.ports = [ "18080:8080" ]
+    end
+  end
+  
 
 #    # We need to persistent data somewhere
 #    config.vm.define "testdb" do |app|

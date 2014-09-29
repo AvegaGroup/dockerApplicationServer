@@ -17,6 +17,7 @@ RUN rm -f /tmp/go-agent.deb
 RUN  \
   export DEBIAN_FRONTEND=noninteractive && \
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+  sed -i 's/\(archive.ubuntu.com\)/se.\1/g' /etc/apt/sources.list && \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get install -y vim wget curl git maven
@@ -27,8 +28,13 @@ RUN curl -sSL https://get.docker.io/ubuntu/ | sudo sh
 # Config files, latest so all downloads is cached
 
 # Go-agent needs to run sudo to do docker commands
-ADD sudoers /etc/sudoers.d/go-agent
-RUN chmod 0440 /etc/sudoers.d/go-agent
+#Provably not needed because it's running as root
+#ADD sudoers /etc/sudoers.d/go-agent
+#RUN chmod 0440 /etc/sudoers.d/go-agent
+
+# Add maven settings
+ADD maven-settings.xml /root/.m2/settings.xml
+#RUN chown -R go:go /var/go/.m2
 
 # This file has my authorization string so that I don't have to approve new agents. 
 ADD autoregister.properties /var/lib/go-agent/config/autoregister.properties
