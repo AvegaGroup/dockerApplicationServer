@@ -13,7 +13,26 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 # docker run -v /var/lib/docker/docker_1411497627_69050:/etc/go/changed -it d1fa8897ed51 /bin/bash
 
 # vagrant reload för att bygga om och ladda om vid behov (utan att destroya)
+  config.vm.define "git" do |config|
+    config.vm.synced_folder "data/git", "/git" 
+    config.vm.provider "docker" do |d|
+      d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.build_dir = "git" 
+      d.ports = [ "19418:9418" ]
+      d.name = "git"
+    end
+  end
 
+ config.vm.define "repository" do |config|
+    config.vm.provider "docker" do |d|
+      d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.image = "mattgruter/artifactory"
+      d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
+      d.name = "repository"
+      d.ports = [ "18080:8080" ]
+    end
+  end
+ 
   config.vm.define "go" do |config|
     config.vm.synced_folder "go/etc/", "/etc/go/changed" 
 #    config.vm.network "forwarded_port", guest: 8153, host: 28153
@@ -23,23 +42,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.expose = [ 8154 ]
       d.ports = [ "28153:8153" ]
       d.name = "go-server"
-      d.env = {"VIRTUAL_HOST"   => "go.lab.sennerholm.net",
-       	       "VIRTUAL_PORT"   => "28153"}
+# For nginx proxy to find it.
+#      d.env = {"VIRTUAL_HOST"   => "go.lab.sennerholm.net",
+#       	       "VIRTUAL_PORT"   => "28153"}
 
     end
   end
 
+
   config.vm.define "go-agent" do |config|
-#    config.vm.synced_folder "go-agent/etc/", "/etc/go-agent/changed" 
     config.vm.provider "docker" do |d|
       d.vagrant_vagrantfile = "docker/Vagrantfile"
       d.build_dir = "go-agent" 
-#      d.ports = [ "28153:8153" ]
       d.name = "go-agent"
       d.volumes = [ "/var/run/docker.sock:/var/run/docker.sock" ]
       d.link("go-server:go-server")
       d.link("repository:repository")
-#      d.link("proxy:proxy")
+      d.link("git:git")
     end
   end
 
@@ -53,24 +72,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   end
   # end
 
-  config.vm.define "registry" do |config|
-    config.vm.provider "docker" do |d|
-      d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.image = "registry"
-      d.name = "registry"
-#      d.volumes = [ "/var/run/docker.sock:/tmp/docker.sock" ]
-    end
-  end
+#  config.vm.define "registry" do |config|
+#    config.vm.provider "docker" do |d|
+#      d.vagrant_vagrantfile = "docker/Vagrantfile"
+#      d.image = "registry"
+#      d.name = "registry"
+#    end
+#  end
 
-  config.vm.define "repository" do |config|
-    config.vm.provider "docker" do |d|
-      d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.image = "mattgruter/artifactory"
-      d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
-      d.name = "repository"
-      d.ports = [ "18080:8080" ]
-    end
-  end
   
 
 #    # We need to persistent data somewhere
