@@ -4,7 +4,11 @@ dockerApplicationServer
 dockerApplicationServer
 
 Starta med:
-vagrant up --provider=docker
+  vagrant up --no-parallel --provider docker
+
+Förutsättningar:
+ VirtualBox
+ Vagrant från vagrantup.com
 
 Surfa därefter till:
   http://localhost:28153/go för go:
