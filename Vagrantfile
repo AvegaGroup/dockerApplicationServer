@@ -42,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.expose = [ 8154 ]
       d.ports = [ "28153:8153" ]
       d.name = "go-server"
+      d.link("git:git")
 # For nginx proxy to find it.
 #      d.env = {"VIRTUAL_HOST"   => "go.lab.sennerholm.net",
 #       	       "VIRTUAL_PORT"   => "28153"}
