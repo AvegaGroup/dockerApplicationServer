@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
   # All port forwards for docker containers need to be added here
   config.vm.network "forwarded_port", guest: 28153, host: 28153 #Go
   config.vm.network "forwarded_port", guest: 80, host: 8080 #Proxy, not configured yet
+  config.vm.network "forwarded_port", guest: 18080, host: 18080 #artifactory
   config.vm.network "forwarded_port", guest: 28080, host: 28080 #doodleshop autosmall
   config.vm.network "forwarded_port", guest: 38080, host: 38080 #doodleshop autolarge
   config.vm.network "forwarded_port", guest: 48080, host: 48080 #doodleshop man
