@@ -23,7 +23,10 @@ RUN  \
   apt-get install -y vim wget curl git maven
 
 #Install docker
-RUN curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+# Not installing latest due to https://github.com/AvegaGroup/dockerApplicationServer/issues/3
+# RUN curl -sSL https://get.docker.io/ubuntu/ | sudo sh
+RUN apt-get install -y docker.io
+RUN ln -s /usr/bin/docker.io /usr/local/bin/docker
 
 # Config files, latest so all downloads is cached
 
