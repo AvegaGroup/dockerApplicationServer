@@ -32,9 +32,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.ports = [ "18080:8080" ]
     end
   end
- 
+
+  config.vm.define "registry" do |config|
+    config.vm.synced_folder "data/registry/storage", "/storage" 
+    config.vm.provider "docker" do |d|
+      d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.image = "registry"
+      d.name = "registry"
+      d.env = {"STORAGE_PATH"   => "/storage", 
+      	       "SETTINGS_FLAVOR"=> "local"}
+      d.ports = [ "5000:5000" ]
+    end
+  end
+
   config.vm.define "go" do |config|
-    config.vm.synced_folder "go/etc/", "/etc/go/changed" 
+#    config.vm.synced_folder "go/etc/", "/etc/go/changed" 
 #    config.vm.network "forwarded_port", guest: 8153, host: 28153
     config.vm.provider "docker" do |d|
       d.vagrant_vagrantfile = "docker/Vagrantfile"
@@ -73,15 +85,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   end
   # end
 
-#  config.vm.define "registry" do |config|
-#    config.vm.provider "docker" do |d|
-#      d.vagrant_vagrantfile = "docker/Vagrantfile"
-#      d.image = "registry"
-#      d.name = "registry"
-#    end
-#  end
-
-  
 
 #    # We need to persistent data somewhere
 #    config.vm.define "testdb" do |app|
