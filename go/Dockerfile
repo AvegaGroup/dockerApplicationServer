@@ -15,12 +15,12 @@ RUN wget -O /tmp/go-server.deb http://download.go.cd/gocd-deb/go-server-14.2.0-3
 RUN dpkg -i /tmp/go-server.deb
 RUN rm -f /tmp/go-server.deb
 
-VOLUME /etc/go/changed
-RUN rm -f /etc/go/cruise-config.xml
-RUN ln -s /etc/go/changed/cruise-config.xml /etc/go/cruise-config.xml
+ADD etc/cruise-config.xml /etc/go/cruise-config.xml
+# Verkar inte bita av någon anledning
+RUN chown -R go:go /etc/go 
 
-#CMD /etc/init.d/go-server start && tail -F /var/log/go-server/go-server.log
-CMD chown -R go:go /etc/go/changed && ls -l /etc/go && ls /etc/go/changed && /etc/init.d/go-server start && tail -F /var/log/go-server/go-server.log 
+#CMD chown -R go:go /etc/go && ls -l /etc/go && /etc/init.d/go-server start && tail -F /var/log/go-server/go-server.log 
+CMD ls -l /etc/go && /etc/init.d/go-server start && tail -F /var/log/go-server/go-server.log 
 
 EXPOSE 8153
 EXPOSE 8154
