@@ -107,9 +107,10 @@
         <jobs>
           <job name="RunTest">
             <tasks>
-              <exec command="bash">
-                <arg>runtest.sh</arg>
-                <arg>3</arg>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>verify</arg>
+                <arg>-B</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
