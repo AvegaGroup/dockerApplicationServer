@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "git" do |config|
     config.vm.synced_folder "data/git", "/git" 
     config.vm.provider "docker" do |d|
+      force_host_vm = true
       d.vagrant_vagrantfile = "docker/Vagrantfile"
       d.build_dir = "git" 
       d.ports = [ "19418:9418" ]
