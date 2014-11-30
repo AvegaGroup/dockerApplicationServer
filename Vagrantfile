@@ -13,16 +13,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 # docker run -v /var/lib/docker/docker_1411497627_69050:/etc/go/changed -it d1fa8897ed51 /bin/bash
 
 # vagrant reload för att bygga om och ladda om vid behov (utan att destroya)
-  config.vm.define "git" do |config|
-    config.vm.synced_folder "data/git", "/git" 
-    config.vm.provider "docker" do |d|
-      force_host_vm = true
-      d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.build_dir = "git" 
-      d.ports = [ "19418:9418" ]
-      d.name = "git"
-    end
-  end
+
+  # # Not used at the moment
+  # config.vm.define "git" do |config|
+  #   config.vm.synced_folder "data/git", "/git" 
+  #   config.vm.provider "docker" do |d|
+  #     force_host_vm = true
+  #     d.vagrant_vagrantfile = "docker/Vagrantfile"
+  #     d.build_dir = "git" 
+  #     d.ports = [ "19418:9418" ]
+  #     d.name = "git"
+  #   end
+  # end
 
  config.vm.define "repository" do |config|
     config.vm.provider "docker" do |d|
@@ -31,20 +33,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
       d.name = "repository"
       d.ports = [ "18080:8080" ]
+      d.remains_running = false
     end
   end
 
-  config.vm.define "registry" do |config|
-    config.vm.synced_folder "data/registry/storage", "/storage" 
-    config.vm.provider "docker" do |d|
-      d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.image = "registry"
-      d.name = "registry"
-      d.env = {"STORAGE_PATH"   => "/storage", 
-      	       "SETTINGS_FLAVOR"=> "local"}
-      d.ports = [ "5000:5000" ]
-    end
-  end
+  #Not used ast the moment
+  # config.vm.define "registry" do |config|
+  #   config.vm.synced_folder "data/registry/storage", "/storage" 
+  #   config.vm.provider "docker" do |d|
+  #     d.vagrant_vagrantfile = "docker/Vagrantfile"
+  #     d.image = "registry"
+  #     d.name = "registry"
+  #     d.env = {"STORAGE_PATH"   => "/storage", 
+  #     	       "SETTINGS_FLAVOR"=> "local"}
+  #     d.ports = [ "5000:5000" ]
+  #     d.remains_running = false
+  #   end
+  # end
 
   config.vm.define "go" do |config|
 #    config.vm.synced_folder "go/etc/", "/etc/go/changed" 
