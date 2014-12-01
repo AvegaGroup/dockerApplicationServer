@@ -4,7 +4,7 @@
   <pipelines group="Doodleshop">
     <pipeline name="DoodleshopBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
       <materials>
-        <git url="https://github.com/sennerholm/doodleshop" branch="pipeline" />
+        <git url="https://github.com/dmarell/doodleshop" />
       </materials>
       <stage name="Build">
         <jobs>
