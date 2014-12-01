@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.volumes = [ "/var/run/docker.sock:/var/run/docker.sock" ]
       d.link("go-server:go-server")
       d.link("repository:repository")
-      d.link("git:git")
+#      d.link("git:git")
     end
   end
 
