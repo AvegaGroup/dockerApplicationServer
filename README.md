@@ -12,10 +12,10 @@ Förutsättningar:
  behöver patch enligt beskrivning längst ner läggas in.
 
 Surfa därefter till:
-  http://localhost:28153/go för go:
+  http://127.0.0.1:28153/go för go:
 
 och:
- http://localhost:58080 för doodleshop i produktion
+ http://127.0.0.1:58080 för doodleshop i produktion
 
 Övriga portmappings:
  28080 autosmall
