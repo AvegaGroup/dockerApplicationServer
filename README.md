@@ -34,7 +34,7 @@ https://github.com/mitchellh/vagrant/commit/57a1269e353c7858d6989dd42e5e96c41634
 
 behöver läggas in för att man inte ska få problem när man laddar hem färdiga docker images.
 
-# Exempel på Mac OS med Vagrant installaerat från vagrantup 
+### Exempel på Mac OS med Vagrant installaerat från vagrantup 
 
 (till Applications/Vagrant/embedded/gems/gems/vagrant-1.6.5)
 Ändra filen /plugins/providers/docker/driver.rb, leta reda på rad 56:
