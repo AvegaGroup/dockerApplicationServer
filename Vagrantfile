@@ -27,7 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # end
 
  config.vm.define "repository" do |config|
-    config.vm.provider "docker" do |d|
+   config.vm.provider "docker" do |d|
+      d.force_host_vm = true
       d.vagrant_vagrantfile = "docker/Vagrantfile"
       d.image = "mattgruter/artifactory"
       d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
@@ -41,7 +42,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.define "registry" do |config|
   #   config.vm.synced_folder "data/registry/storage", "/storage" 
   #   config.vm.provider "docker" do |d|
-  #     d.vagrant_vagrantfile = "docker/Vagrantfile"
+ #     d.vagrant_vagrantfile = "docker/Vagrantfile"
+#       d.force_host_vm = true
   #     d.image = "registry"
   #     d.name = "registry"
   #     d.env = {"STORAGE_PATH"   => "/storage", 
@@ -56,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #    config.vm.network "forwarded_port", guest: 8153, host: 28153
     config.vm.provider "docker" do |d|
       d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.force_host_vm = true
       d.build_dir = "go" 
       d.expose = [ 8154 ]
       d.ports = [ "28153:8153" ]
@@ -71,6 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "go-agent" do |config|
     config.vm.provider "docker" do |d|
+      d.force_host_vm = true
       d.vagrant_vagrantfile = "docker/Vagrantfile"
       d.build_dir = "go-agent" 
       d.name = "go-agent"
