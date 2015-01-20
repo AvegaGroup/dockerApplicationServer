@@ -1,7 +1,8 @@
 # From: https://github.com/mitchellh/vagrant/issues/3726
 Vagrant.configure("2") do |config|
   config.vm.box = "sennerholm/boot2docker"
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/6816236/boot2docker_virtualbox.box"
+#  config.vm.box_url = "https://dl.dropboxusercontent.com/u/6816236/boot2docker_virtualbox.box"
+  config.vm.box_url = "https://dl.dropboxusercontent.com/u/6816236/boot2docker_virtualbox1.4.1.box"
 
   # All port forwards for docker containers need to be added here
   config.vm.network "forwarded_port", guest: 28153, host: 28153 #Go
