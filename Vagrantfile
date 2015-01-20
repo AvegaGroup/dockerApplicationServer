@@ -33,6 +33,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.image = "mattgruter/artifactory"
       d.volumes = [ "/vagrant/artifactory/logs:/artifactory/logs" ]
       d.name = "repository"
+      d.ports = [ "19090:8080" ]
+      d.remains_running = false
+    end
+  end
+
+ config.vm.define "haproxy" do |config|
+   config.vm.provider "docker" do |d|
+      d.force_host_vm = true
+      d.vagrant_vagrantfile = "docker/Vagrantfile"
+      d.image = "dockerfile/haproxy"
+      d.volumes = [ "/vagrant/haproxy:/haproxy-override" ]
+      d.name = "haproxy"
       d.ports = [ "18080:8080" ]
       d.remains_running = false
     end
