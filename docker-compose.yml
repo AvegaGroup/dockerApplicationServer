@@ -1,0 +1,19 @@
+repository:
+  image: mattgruter/artifactory
+  volumes:
+  - data/artifactory/logs:/artifactory/logs
+  ports:
+  - "18080:8080"
+goserver:
+  build: go
+  ports:
+  - "28153:8153"
+goagent:
+  build: goAgent
+  links:
+  - repository
+  - goserver
+  environment:  
+  - DOCKER_HOST
+  - DOCKER_TLS_VERIFY
+  - DOCKER_CERT_PATH
