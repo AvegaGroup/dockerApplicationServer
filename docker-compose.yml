@@ -1,6 +1,7 @@
 repository:
   image: mattgruter/artifactory
   volumes:
+    - data/artifactory/data:/artifactory/data
     - data/artifactory/logs:/artifactory/logs
   ports:
     - "18080:8080"
