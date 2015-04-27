@@ -1,28 +1,28 @@
 repository:
   image: mattgruter/artifactory
   volumes:
-  - data/artifactory/logs:/artifactory/logs
+    - data/artifactory/logs:/artifactory/logs
   ports:
-  - "18080:8080"
-godata:
-  build: gocd-data
-# TODO: Need an data container with configuration file
+    - "18080:8080"
 goserver:
   image: gocd/gocd-server
   volumes_from:
-  - godata
+    - godata
   ports:
-  - "28153:8153"
+    - "28153:8153"
 # Extend gocd/gocd-agent
-#Need a copy to work 
+#Need a copy to work
+godata:
+  build: gocd-data
+# TODO: Need an data container with configuration file 
 goagent:
   build: go-agent
   volumes:
-  - data/goagent:/root/.docker
+    - data/goagent:/root/.docker
   links:
-  - repository
-  - goserver
+    - repository
+    - goserver
   environment:  
-  - DOCKER_HOST
-  - DOCKER_TLS_VERIFY
+    - DOCKER_HOST
+    - DOCKER_TLS_VERIFY
   #- DOCKER_CERT_PATH
