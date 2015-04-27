@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="72">
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="74">
   <server artifactsdir="artifacts" agentAutoRegisterKey="388b633a88de126531afa41eff9aa69e" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" />
   <pipelines group="Doodleshop">
     <pipeline name="DoodleshopBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
@@ -25,7 +25,7 @@
               </exec>
               <exec command="/bin/bash">
                 <arg>-c</arg>
-                <arg>sudo docker build --tag=doodleshop:$GO_PIPELINE_LABEL .</arg>
+                <arg>docker build --tag=doodleshop:$GO_PIPELINE_LABEL .</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -183,6 +183,6 @@
       </stage>
     </pipeline>
   </pipelines>
-  <agents>
   </agents>
 </cruise>
+
