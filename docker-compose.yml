@@ -4,9 +4,13 @@ repository:
   - data/artifactory/logs:/artifactory/logs
   ports:
   - "18080:8080"
+godata:
+  build: gocd-data
 # TODO: Need an data container with configuration file
 goserver:
   image: gocd/gocd-server
+  volumes_from:
+  - godata
   ports:
   - "28153:8153"
 # Extend gocd/gocd-agent
