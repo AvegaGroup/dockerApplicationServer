@@ -4,16 +4,18 @@ repository:
   - data/artifactory/logs:/artifactory/logs
   ports:
   - "18080:8080"
+# TODO: Need an data container with configuration file
 goserver:
-  build: go
+  image: gocd/gocd-server
   ports:
   - "28153:8153"
+# Extend gocd/gocd-agent
 goagent:
-  build: goAgent
+  image: gocd/gocd-agent
   links:
   - repository
   - goserver
-  environment:  
-  - DOCKER_HOST
-  - DOCKER_TLS_VERIFY
-  - DOCKER_CERT_PATH
+#  environment:  
+#  - DOCKER_HOST
+#  - DOCKER_TLS_VERIFY
+#  - DOCKER_CERT_PATH
