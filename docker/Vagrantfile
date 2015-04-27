@@ -8,13 +8,23 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 28153, host: 28153 #Go
   config.vm.network "forwarded_port", guest: 80, host: 8080 #Proxy, not configured yet
   config.vm.network "forwarded_port", guest: 18080, host: 18080 #ha-proxy prod
+  config.vm.network "forwarded_port", guest: 19200, host: 19200 #ha-proxy prod
   config.vm.network "forwarded_port", guest: 19090, host: 19090 #artifactory
   config.vm.network "forwarded_port", guest: 28080, host: 28080 #doodleshop autosmall
+  config.vm.network "forwarded_port", guest: 29200, host: 29200 #doodleshop autosmall management port
+  
   config.vm.network "forwarded_port", guest: 38080, host: 38080 #doodleshop autolarge
+  config.vm.network "forwarded_port", guest: 39200, host: 39200 #doodleshop autolarge management port
+  
   config.vm.network "forwarded_port", guest: 48080, host: 48080 #doodleshop man
-  config.vm.network "forwarded_port", guest: 54040, host: 54040 #doodleshop prod green
-  config.vm.network "forwarded_port", guest: 58080, host: 58080 #doodleshop prod blue
+  config.vm.network "forwarded_port", guest: 49200, host: 49200 #doodleshop man management port
 
+  config.vm.network "forwarded_port", guest: 54040, host: 54040 #doodleshop prod green
+  #config.vm.network "forwarded_port", guest: 59200, host: 59200 #doodleshop green management port
+  
+  config.vm.network "forwarded_port", guest: 58080, host: 58080 #doodleshop prod blue
+  config.vm.network "forwarded_port", guest: 59200, host: 59200 #doodleshop blue management port
+  
   config.vm.synced_folder "..", "/vagrant"
 
   config.vm.provider "virtualbox" do |v|
