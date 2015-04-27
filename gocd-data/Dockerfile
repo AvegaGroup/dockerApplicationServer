@@ -1,5 +1,4 @@
-#TODO: find better image containing /bin/true & echo 
-FROM dockerfile/java:oracle-java8
+FROM busybox
 
 COPY conf/cruise-config.xml /etc/go/cruise-config.xml
 RUN chown -R 999:999 /etc/go
