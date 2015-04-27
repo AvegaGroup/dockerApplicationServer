@@ -9,7 +9,7 @@ goserver:
   ports:
   - "28153:8153"
 goagent:
-  build: goAgent
+  build: go-agent
   links:
   - repository
   - goserver
