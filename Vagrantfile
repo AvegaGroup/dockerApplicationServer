@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.vm.provider "docker" do |d|
       d.force_host_vm = true
       d.vagrant_vagrantfile = "docker/Vagrantfile"
-      d.image = "dockerfile/haproxy"
+      d.image = "haproxy"
       d.volumes = [ "/vagrant/haproxy:/haproxy-override" ]
       d.name = "haproxy"
       d.ports = [ "18080:8080" ]
