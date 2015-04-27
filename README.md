@@ -61,3 +61,6 @@ installera Docker compose
 Kopiera dina cert till data/go-agent (cp $DOCKER_CERT_PATH/* data/goagent/)
 
 docker-compose up
+
+För att starta en till agent:
+docker-compose scale goagent=2
