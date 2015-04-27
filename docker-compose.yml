@@ -12,7 +12,7 @@ goserver:
 # Extend gocd/gocd-agent
 #Need a copy to work 
 goagent:
-  build: go-agent/
+  build: go-agent
   volumes:
   - data/goagent:/root/.docker
   links:
