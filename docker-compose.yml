@@ -16,7 +16,10 @@ goserver:
 godata:
   build: gocd-data
 goagent:
+# Build Localy
   build: go-agent
+# Use prebuilt
+#  image: sennerholm/gocd-agent
   volumes:
     - data/go-agent:/root/.docker
   links:
