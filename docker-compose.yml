@@ -13,15 +13,12 @@ goserver:
     - "28153:8153"
   environment:  
     - AGENT_KEY=388b633a88de126531afa41eff9aa69e
-# Extend gocd/gocd-agent
-#Need a copy to work
 godata:
   build: gocd-data
-# TODO: Need an data container with configuration file 
 goagent:
   build: go-agent
   volumes:
-    - data/goagent:/root/.docker
+    - data/go-agent:/root/.docker
   links:
     - repository
     - goserver
