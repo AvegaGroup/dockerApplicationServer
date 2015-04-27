@@ -10,12 +10,15 @@ goserver:
   ports:
   - "28153:8153"
 # Extend gocd/gocd-agent
+#Need a copy to work 
 goagent:
-  image: gocd/gocd-agent
+  build: go-agent/
+  volumes:
+  - data/goagent:/root/.docker
   links:
   - repository
   - goserver
-#  environment:  
-#  - DOCKER_HOST
-#  - DOCKER_TLS_VERIFY
-#  - DOCKER_CERT_PATH
+  environment:  
+  - DOCKER_HOST
+  - DOCKER_TLS_VERIFY
+  #- DOCKER_CERT_PATH
