@@ -145,7 +145,7 @@
     </pipeline>
     <pipeline name="DoodleshopProd">
       <materials>
-        <pipeline pipelineName="DoodleshopMan" stageName="ManDeploy" materialName="DoodleshopMan" />
+        <pipeline pipelineName="DoodleshopMan" stageName="TestsOk" materialName="DoodleshopMan" />
         <pipeline pipelineName="DoodleshopAutoLarge" stageName="AutoLargeDeployAndTest" materialName="DoodleshopAutoLarge" />
       </materials>
       <stage name="CreateReportsForDecision">
