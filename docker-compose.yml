@@ -11,6 +11,8 @@ goserver:
     - godata
   ports:
     - "28153:8153"
+  environment:  
+    - AGENT_KEY=388b633a88de126531afa41eff9aa69e
 # Extend gocd/gocd-agent
 #Need a copy to work
 godata:
@@ -26,5 +28,4 @@ goagent:
   environment:  
     - DOCKER_HOST
     - DOCKER_TLS_VERIFY
-    - AGENT_KEY=388b633a88de126531afa41eff9aa69e
   #- DOCKER_CERT_PATH
