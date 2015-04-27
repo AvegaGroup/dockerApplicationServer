@@ -51,7 +51,6 @@ på slutet
 # Med Docker-compose (fd fig)
 installera boot2docker
 installera Docker compose
-Kopiera dina cert till data/goagent (cp $DOCKER_CERT_PATH/*
-data/goagent/)
+Kopiera dina cert till data/goagent (cp $DOCKER_CERT_PATH/* data/goagent/)
 
 docker-compose up
