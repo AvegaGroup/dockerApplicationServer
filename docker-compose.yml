@@ -21,10 +21,7 @@ goagent:
 # Use prebuilt
 #  image: sennerholm/gocd-agent
   volumes:
-    - data/go-agent:/root/.docker
+     - "/var/run/docker.sock:/var/run/docker.sock"
   links:
     - repository
     - goserver
-  environment:  
-    - DOCKER_HOST
-    - DOCKER_TLS_VERIFY

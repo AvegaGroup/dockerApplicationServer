@@ -49,18 +49,24 @@ på slutet
 
 
 # Med Docker-compose (fd fig)
+
 installera boot2docker
-boot2docker öka minnet i virtualbox till 4GB från 2GB,
+
+boot2docker öka minnet i virtualbox till 4GB från 2GB, t ex genom:
   $ boot2docker delete
   $ boot2docker init -m 5555
 ... lots of output ...
  $ boot2docker info
 
-boot2docker up
-installera Docker compose
-Kopiera dina cert till data/go-agent (cp $DOCKER_CERT_PATH/* data/goagent/)
+Starta boot2docker:
+ boot2docker up
 
-docker-compose up
+installera Docker compose enligt http://docs.docker.com/compose/install/
 
-För att starta en till agent:
-docker-compose scale goagent=2
+För att starta din miljö:
+ docker-compose up
+
+Surfa därefter in på (Linux: Localhost, Mac boot2docker ip):28153/go
+
+För att starta en till agent och skala upp miljön:
+  docker-compose scale goagent=2
