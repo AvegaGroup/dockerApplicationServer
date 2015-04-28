@@ -41,6 +41,7 @@ behöver läggas in för att man inte ska få problem när man laddar hem färdi
 
 execute(*run_cmd.flatten, **opts, &block).chomp
 
+
 och lägg in
 
 .lines.last 
