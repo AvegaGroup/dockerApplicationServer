@@ -58,7 +58,7 @@ boot2docker öka minnet i virtualbox till 4GB från 2GB,
 
 boot2docker up
 installera Docker compose
-Kopiera dina cert till data/go-agent (cp $DOCKER_CERT_PATH/* data/goagent/)
+Kopiera dina cert till data/go-agent (cp $DOCKER_CERT_PATH/* data/go-agent/)
 
 docker-compose up
 
