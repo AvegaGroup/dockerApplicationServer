@@ -1,7 +1,40 @@
 dockerApplicationServer
 =======================
 
-dockerApplicationServer
+## Starta med Docker-compose
+
+Installera boot2docker: http://boot2docker.io/
+
+Öka minnet i virtualbox till 4GB från 2GB:
+  $ boot2docker delete
+  $ boot2docker init -m 4096
+
+Starta boot2docker:
+  $ boot2docker up
+
+Installera Docker compose enligt http://docs.docker.com/compose/install/
+
+Starta pipelinen:
+ $ docker-compose up
+ 
+Om du kör Mac OSX, ta reda på ip-adress. På Linux fungerar localhost:
+
+ $ boot2docker ip
+
+Öppna en webbläsare på http://<ip>:28153/go
+
+För att starta en till agent och skala upp miljön:
+  $ docker-compose scale goagent=2
+
+doodleshop (applikationen) i produktion: http://ip:58080
+
+Övriga portmappings:
+ 28080 autosmall
+ 38080 autolarge
+ 48080 man
+ 58080 prod
+
+## Starta med Vagrant
 
 Starta med:
   vagrant up --no-parallel --provider docker
@@ -17,16 +50,7 @@ Surfa därefter till:
 och:
  http://127.0.0.1:58080 för doodleshop i produktion
 
-Övriga portmappings:
- 28080 autosmall
- 38080 autolarge
- 48080 man
- 58080 prod
-
-Så får du upp en pipeline
-
-
-## Patch för Vagrant 1.6.5
+### Patch för Vagrant 1.6.5
 
 Ändringen från:
 
@@ -34,13 +58,12 @@ https://github.com/mitchellh/vagrant/commit/57a1269e353c7858d6989dd42e5e96c41634
 
 behöver läggas in för att man inte ska få problem när man laddar hem färdiga docker images.
 
-### Exempel på Mac OS med Vagrant installaerat från vagrantup 
+#### Exempel på Mac OS med Vagrant installerat från vagrantup 
 
 (till Applications/Vagrant/embedded/gems/gems/vagrant-1.6.5)
 Ändra filen /plugins/providers/docker/driver.rb, leta reda på rad 56:
 
 execute(*run_cmd.flatten, **opts, &block).chomp
-
 
 och lägg in
 
@@ -48,26 +71,3 @@ och lägg in
 
 på slutet
 
-
-# Med Docker-compose (fd fig)
-
-installera boot2docker
-
-boot2docker öka minnet i virtualbox till 4GB från 2GB, t ex genom:
-  $ boot2docker delete
-  $ boot2docker init -m 5555
-... lots of output ...
- $ boot2docker info
-
-Starta boot2docker:
- boot2docker up
-
-installera Docker compose enligt http://docs.docker.com/compose/install/
-
-För att starta din miljö:
- docker-compose up
-
-Surfa därefter in på (Linux: Localhost, Mac boot2docker ip):28153/go
-
-För att starta en till agent och skala upp miljön:
-  docker-compose scale goagent=2
