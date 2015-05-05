@@ -24,7 +24,9 @@ Om du kör Mac OSX, ta reda på ip-adress. På Linux fungerar localhost:
 
     $ boot2docker ip
 
-Öppna en webbläsare på http://<ip>:28153/go
+Öppna en webbläsare på 
+
+    http://<ip>:28153/go
 
 För att starta en till agent och skala upp miljön:
 
