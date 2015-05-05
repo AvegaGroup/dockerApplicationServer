@@ -36,10 +36,12 @@ doodleshop (applikationen) i produktion: http://ip:58080
 
 Övriga portmappings (samma för vagrant varianten):
 
-   28080 autosmall
-   38080 autolarge
-   48080 man
-   58080 prod
+Port | Tjänst
+------|--------
+28080 | autosmall
+38080 | autolarge
+48080 | man
+58080 | prod
 
 ## Starta med Vagrant
 
