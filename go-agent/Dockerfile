@@ -7,8 +7,9 @@
 FROM maven:3-jdk-8
 MAINTAINER Mikael Sennerholm <mikael@sennerholm.net>
 
-# Download and install Go-agent 14.4.0, curl/git and docker 
-RUN wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-14.4.0-1356.deb && \
+# Download and install Go-agent 15.1.0, curl/git and docker 
+# http://download.go.cd/gocd-deb/go-agent-15.1.0-1863.deb
+RUN wget -O /tmp/go-agent.deb http://download.go.cd/gocd-deb/go-agent-15.1.0-1863.deb && \
 	dpkg -i /tmp/go-agent.deb && \
 	rm -f /tmp/go-agent.deb && \ 
   	apt-get install -y curl git && \ 

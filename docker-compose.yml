@@ -6,7 +6,7 @@ repository:
   ports:
     - "18080:8080"
 goserver:
-  image: gocd/gocd-server
+  image: gocd/gocd-server:15.1.0
   volumes_from:
     - godata
   ports:
