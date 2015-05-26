@@ -3,6 +3,9 @@
   <server artifactsdir="artifacts" agentAutoRegisterKey="388b633a88de126531afa41eff9aa69e" commandRepositoryLocation="default" serverId="3c98e67f-7050-46ef-b051-fd8e63aef897" />
   <pipelines group="Doodleshop">
     <pipeline name="DoodleshopBAT" labeltemplate="1.0.${COUNT}" isLocked="false">
+      <params>
+        <param name="SOURCE_DIR"></param>
+      </params>
       <trackingtool link="https://github.com/dmarell/doodleshop/issues/${ID}" regex="##(\d+)" />
       <materials>
         <git url="https://github.com/dmarell/doodleshop" />
@@ -11,28 +14,28 @@
         <jobs>
           <job name="Build2DockerImage">
             <tasks>
-              <exec command="mvn">
+              <exec command="mvn" workingdir="#{SOURCE_DIR}">
                 <arg>versions:set</arg>
                 <arg>-DnewVersion=${env.GO_PIPELINE_LABEL}</arg>
                 <arg>-B</arg>
                 <runif status="passed" />
               </exec>
-              <exec command="mvn">
+              <exec command="mvn" workingdir="#{SOURCE_DIR}">
                 <arg>clean</arg>
                 <arg>package</arg>
                 <arg>-B</arg>
                 <runif status="passed" />
               </exec>
-              <exec command="/bin/bash">
+              <exec command="/bin/bash" workingdir="#{SOURCE_DIR}">
                 <arg>-c</arg>
                 <arg>sudo docker build --tag=doodleshop:$GO_PIPELINE_LABEL .</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
             <artifacts>
-              <artifact src="target/classes/BuildInfo.properties" dest="downstream" />
-              <artifact src="scripts" dest="downstream" />
-              <artifact src="tests" dest="downstream" />
+              <artifact src="#{SOURCE_DIR}target/classes/BuildInfo.properties" dest="downstream" />
+              <artifact src="#{SOURCE_DIR}scripts" dest="downstream" />
+              <artifact src="#{SOURCE_DIR}tests" dest="downstream" />
             </artifacts>
           </job>
         </jobs>
