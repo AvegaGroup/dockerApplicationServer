@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <mirrors>
     <mirror>
-      <mirrorOf>*</mirrorOf>
+      <mirrorOf>*,!spring-snapshots,!spring-milestones</mirrorOf>
       <name>remote-repos</name>
       <url>http://repository:8080/artifactory/remote-repos</url>
       <id>remote-repos</id>
