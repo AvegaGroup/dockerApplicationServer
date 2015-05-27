@@ -83,3 +83,22 @@ och lägg in
 
 på slutet
 
+## Anpassa ett annat projekt
+
+För att anpassa ett annat projekt med minimala förändringar till pipelinen i GO måste man lägga till scripts som 
+pipelinen använder för att köra test samt konfigurera Dockerfile
+
+Ett komplett exempelprojekt ligger här: https://github.com/andreasfolkesson/spring-boot vilket är en fork av spring boot.
+Exempelprojektet "spring-boot-samples/spring-boot-sample-web-ui/" är anpassat genom att lägga till scriptsktatalogen
+och testskatalogen samt en förändring i Dockerfile och pom.xml.
+
+För att köra detta projektet genom pipelinene, ändra git URL'en under Materials i DoodleshopBAT till: 
+"https://github.com/andreasfolkesson/spring-boot".
+
+![source dir config](doc/materials-config.png)
+
+Editera DoodleshopBAT pipelinen och gå till "Parameters". Sätt 
+"spring-boot-samples/spring-boot-sample-web-ui/" som värdet för SOURCE_DIR.
+
+![source dir config](doc/source-config.png)
+
