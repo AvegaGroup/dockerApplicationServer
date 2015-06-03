@@ -25,3 +25,11 @@ goagent:
   links:
     - repository
     - goserver
+elk:
+  image: willdurand/elk
+  volumes:
+    - elk/config:/etc/logstash
+  ports:
+    - "8080:80"
+    - "42000:42000"
+    
