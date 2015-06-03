@@ -14,6 +14,10 @@ Starta boot2docker:
 
     $ boot2docker up
 
+Man kan behöva sätta environment variabler genom:
+
+    $ $(boot2docker shellinit)
+
 Installera Docker compose enligt http://docs.docker.com/compose/install/
 
 Starta pipelinen:
