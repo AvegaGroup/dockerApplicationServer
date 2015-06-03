@@ -67,7 +67,7 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopAutoLarge">
+    <pipeline name="DoodleshopAutoLarge" labeltemplate="${DoodleshopBAT}-al${COUNT}" isLocked="false">
       <materials>
         <pipeline pipelineName="DoodleshopBAT" stageName="AutoSmallDeployAndTest" />
       </materials>
@@ -98,7 +98,7 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopMan" isLocked="false">
+    <pipeline name="DoodleshopMan" labeltemplate="${DoodleshopBAT}-man${COUNT}" isLocked="false" >
       <materials>
         <pipeline pipelineName="DoodleshopBAT" stageName="AutoSmallDeployAndTest" />
       </materials>
@@ -146,7 +146,7 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopProd">
+    <pipeline name="DoodleshopProd" labeltemplate="${DoodleshopAutoLarge}-pr${COUNT}" isLocked="false">
       <materials>
         <pipeline pipelineName="DoodleshopMan" stageName="TestsOk" materialName="DoodleshopMan" />
         <pipeline pipelineName="DoodleshopAutoLarge" stageName="AutoLargeDeployAndTest" materialName="DoodleshopAutoLarge" />
