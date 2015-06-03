@@ -98,7 +98,7 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="DoodleshopMan" labeltemplate="${DoodleshopBAT}-al${COUNT}" isLocked="false" >
+    <pipeline name="DoodleshopMan" labeltemplate="${DoodleshopBAT}-man${COUNT}" isLocked="false" >
       <materials>
         <pipeline pipelineName="DoodleshopBAT" stageName="AutoSmallDeployAndTest" />
       </materials>
